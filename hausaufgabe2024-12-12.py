@@ -22,7 +22,8 @@ print(f"Das Ergebnis ist: {addition_zahl1_2}")
 
 zahl = input("Bitte gebe hier eine Zahl ein: ")
 
-if int(zahl) < 0: 
-    print("Die Zahl ist negativ")
-if int(zahl) > 0: 
+if zahl >= 0:
     print("Die Zahl ist positiv")  # soweit bin ich nur gekommen
+
+else:
+    print("Die Zahl ist negativ")
