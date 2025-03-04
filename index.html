@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttons mit JavaScript</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 50px;
+        }
+        #message {
+            display: none; 
+            font-size: 18px;
+            color: blue;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body id="body">
+
+    <button onclick="changeColor()">Hintergrund ändern</button>
+
+    <button onclick="showMessage()">Zeige Nachricht</button>
+
+    <p id="message">Button wurde geklickt, cool</p>
+
+    <script>
+        function changeColor() {
+            let body = document.getElementById("body");
+            if (body.style.backgroundColor === "green") {
+                body.style.backgroundColor = "red";
+            } else {
+                body.style.backgroundColor = "green";
+            }
+        }
+
+        function showMessage() {
+            document.getElementById("message").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
