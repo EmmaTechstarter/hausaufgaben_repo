@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaß mit Listen</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <input id="userInput" placeholder="Put in List items, divided with comma">
+    <button onclick="setUserInputList()">Elemente hinzufügen</button>
+
+    <input id="singleItemInput" placeholder="Einzelnes Element hinzufügen">
+    <button onclick="addSingleItem()">Item hinzufügen</button>
+
+    <div id="liste"></div>
+
+    <button onclick="removeLastItem()">Letztes Element löschen</button>
+    <button onclick="toggleTheme()">Theme wechseln</button>
+</body>
+</html>
