@@ -40,9 +40,6 @@ addButton.addEventListener("click", () => {
 
     new_li.textContent = `${anzahl} x ${artikel}: ${preis}€ l'unité ------ ${anzahl * preis}€`;
 
-
-
-
     // Füge einen Löschen Button hinzu
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "❌";
@@ -63,7 +60,7 @@ addButton.addEventListener("click", () => {
     else if (kategorie === "getraenke") emoji = "🍾";
     else if (kategorie === "gebaeck") emoji = "🍞";
     else if (kategorie === "krams") emoji = "🕹️";
-    new_li.textContent = `${emoji} ${anzahl} x ${artikel}: ${preis}€ l'unité ------ ${anzahl * preis}€`;
+    new_li.textContent = `${emoji} ${anzahl} x ${artikel}: ${preis}€ ------ ${anzahl * preis}€`;
 
     //Checkbox erstellen
     const Checkbox = document.createElement("input");
@@ -112,7 +109,7 @@ function updatePreis() {
 }
 
     // Enter-Taste
-    var input = document.getElementById("preis");
+    let input = document.getElementById("preis");
     input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
     event.preventDefault();
