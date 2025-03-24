@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einkaufsliste</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <img src="./sun-xxl.png" alt="light mode" width="30px" id="modeLight">
+    <img src="./sun.png" alt="dark mode" width="30px" id="modeDark">
+    <h1>Einkaufsliste</h1>
+    <input type="text" id="artikel" placeholder="Artikelname...">
+    <input type="number" id="anzahl" placeholder="Anzahl...">
+    <select id="kategorie">
+        <option value="obst">🍎 Obst</option>
+        <option value="gemuese">🥦 Gemüse</option>
+        <option value="konserven">🥫 Konserven</option>
+        <option value="getraenke">🍾 Getränke</option>
+        <option value="drogerie">🧴 Drogerie</option>
+        <option value="gebaeck">🍞 Gebäck</option>
+        <option value="krams">🕹️ Schnick Schnack</option>
+    </select>    
+    <input type="number" id="preis" placeholder="Preis pro Stück...">
+    <button id="addButton">Hinzufügen</button>
+    <ul id="liste"></ul>
+    <h5 id="gesamt"></h5>
+    <button id="deletbutton">Löschen</button>
+</body>
+
+</html>
