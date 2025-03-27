@@ -21,19 +21,16 @@ let chars = [
   ];
   
 
-// 1. GET /chars → Liste aller Charaktere
 app.get("/chars", (req, res) => {
   res.json(chars);
 });
 
-// 2. GET /chars/search?rasse=Nord → Filtert nach Rasse
 app.get("/chars/search", (req, res) => {
   const { rasse } = req.query;
   const result = chars.filter(c => c.rasse.toLowerCase() === rasse.toLowerCase());
   res.json(result);
 });
 
-// 3. GET /chars/:id → Gibt Charakter mit bestimmter ID zurück
 app.get("/chars/:id", (req, res) => {
   const char = chars.find(c => c.id === parseInt(req.params.id));
   if (char) {
@@ -43,7 +40,6 @@ app.get("/chars/:id", (req, res) => {
   }
 });
 
-// 4. POST /chars → Neuen Charakter hinzufügen
 app.post("/chars", (req, res) => {
   const { name, rasse, alter } = req.body;
   const id = chars.length > 0 ? chars[chars.length - 1].id + 1 : 1;
