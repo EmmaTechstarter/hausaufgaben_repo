@@ -9,11 +9,20 @@ const DATA_FILE = './daten.json';
 app.use(bodyParser.json());
 
 async function readData() {
-  return fs.readJSON(DATA_FILE);
+  try {
+    return await fs.readJSON(DATA_FILE);
+  } catch (err) {
+    console.error("Fehler beim Lesen der Daten", err.message);
+    return [];
+  }
 }
 
 async function writeData(data) {
-  return fs.writeJSON(DATA_FILE, data, { spaces: 2 });
+  try {
+    await fs.writeJSON(DATA_FILE, data, { spaces: 2 });
+  } catch (err) {
+    console.error("Fehler beim Schreiben der Daten", err.message);
+  }
 }
 
 app.get('/books', async (req, res) => {
@@ -42,31 +51,66 @@ app.get('/books/search', async (req, res) => {
   });
   
 
-app.post('/books', async (req, res) => {
-  const books = await readData();
-  const newBook = {
-    id: Date.now(),
-    title: req.body.title,
-    year: req.body.year
-  };
-  books.push(newBook);
-  await writeData(books);
-  res.status(201).json(newBook);
-});
+  app.post('/books', async (req, res) => {
+    let { title, year } = req.body;
+    title = title.trim();    
+  
+    if (!title || !year) {
+      return res.status(400).json({ message: "Bitte 'title' und 'year' angeben." });
+    }
+  
+    if (parseInt(year) < 1895) {
+      return res.status(400).json({ message: "Jahr muss ≥ 1895 sein (Beginn der Filmtechnik)." });
+    }
+  
+    const books = await readData();
+    const titleExists = books.some(book => book.title.toLowerCase() === title.toLowerCase());
+  
+    if (titleExists) {
+      return res.status(409).json({ message: "Ein Buch mit diesem Titel existiert bereits." });
+    }
+  
+    const newBook = {
+      id: Date.now(),
+      title,
+      year
+    };
+  
+    books.push(newBook);
+    await writeData(books);
+    res.status(201).json(newBook);
+  });
+  
 
 app.put('/books/:id', async (req, res) => {
+  let { title, year } = req.body;
+  title = title.trim();    
+
   const books = await readData();
-  const bookId = parseInt(req.params.id);
   const index = books.findIndex(book => book.id === bookId);
 
   if (index === -1) {
-    return res.status(404).json({ message: 'Buch nicht gefunden' });
+    return res.status(404).json({ message: "Buch nicht gefunden." });
   }
 
-  books[index] = { ...books[index], ...req.body };
+  if (!title || !year) {
+    return res.status(400).json({ message: "Bitte 'title' und 'year' angeben." });
+  }
+
+  if (parseInt(year) < 1895) {
+    return res.status(400).json({ message: "Jahr muss ≥ 1895 sein." });
+  }
+
+  const duplicate = books.find(book => book.title.toLowerCase() === title.toLowerCase() && book.id !== bookId);
+  if (duplicate) {
+    return res.status(409).json({ message: "Ein anderes Buch mit diesem Titel existiert bereits." });
+  }
+
+  books[index] = { ...books[index], title, year };
   await writeData(books);
   res.json(books[index]);
 });
+
 
 app.delete('/books/:id', async (req, res) => {
   const books = await readData();

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tolkien Bücher</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <h1>Tolkien Bücher</h1>
+
+  <h2>Buch hinzufügen</h2>
+  <input id="titleInput" type="text" placeholder="Titel" />
+  <input id="yearInput" type="number" placeholder="Jahr (≥ 1895)" />
+  <button onclick="addBook()">Hinzufügen</button>
+  <p id="message"></p>
+
+  <h2>Bücher durchsuchen</h2>
+  <input id="searchTitle" type="text" placeholder="Titel suchen..." />
+  <input id="searchYear" type="number" placeholder="Jahr suchen..." />
+  <button onclick="loadBooks()">Suchen</button>
+
+  <h2>Alle Bücher</h2>
+  <div id="bookList"></div>
+</body>
+</html>
