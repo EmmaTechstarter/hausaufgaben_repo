@@ -26,3 +26,33 @@ buttonShowAnimals.addEventListener("click", async () => {
         });
     }
 });
+
+const tierForm = document.getElementById("tier_form");
+
+tierForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(tierForm);
+  const tier = {
+    tierart: formData.get("tierart"),
+    name: formData.get("name"),
+    krankheit: formData.get("krankheit"),
+    age: parseInt(formData.get("age")),
+    gewicht: parseFloat(formData.get("gewicht"))
+  };
+
+  const response = await fetch("http://127.0.0.1:3000/tiere", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(tier)
+  });
+
+  if (response.ok) {
+    alert("Tier hinzugefügt!");
+    tierForm.reset();
+  } else {
+    alert("Fehler beim Hinzufügen.");
+  }
+});
