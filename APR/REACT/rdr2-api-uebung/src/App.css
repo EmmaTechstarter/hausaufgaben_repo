@@ -83,3 +83,18 @@ p {
   font-size: 1rem;
   line-height: 1.4;
 }
+
+a.card {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container a {
+  color: #b03a2e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.container a:hover {
+  text-decoration: underline;
+}

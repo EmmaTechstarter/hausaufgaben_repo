@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -34,6 +35,8 @@ function Events() {
     return () => clearInterval(interval);
   }, [nextEvent]);
 
+  const makeSlug = (name) => name.toLowerCase().replace(/\s+/g, "-");
+
   return (
     <div className="container">
       <h1>Free Roam Events</h1>
@@ -49,12 +52,16 @@ function Events() {
       ) : (
         <div className="grid">
           {events.map((event, index) => (
-            <div className="card" key={index}>
+            <Link
+              to={`/event/${makeSlug(event.name)}`}
+              className="card"
+              key={index}
+            >
               <h3>{event.name}</h3>
               <p><strong>Typ:</strong> {event.type}</p>
               <p><strong>Beschreibung:</strong> {event.description || "–"}</p>
               <p><strong>Zeit:</strong> {event.time || "Unbekannt"}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
