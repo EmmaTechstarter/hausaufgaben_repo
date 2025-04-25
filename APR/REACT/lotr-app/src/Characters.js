@@ -7,7 +7,7 @@ function Characters() {
   useEffect(() => {
     fetch("https://the-one-api.dev/v2/character", {
       headers: {
-        Authorization: "Bearer xrB0fg4uwSp_gKcpDBrK"
+        Authorization: "Bearer ----"
       }
     })
       .then((res) => res.json())
